@@ -36,7 +36,7 @@ def playGame():
             
         else:
             isGameOver = True
+            os.system('cls')
             print(f"Sorry, that's wrong. Final score: {score}")
-    
     
 playGame()
