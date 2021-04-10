@@ -1,7 +1,7 @@
 import random as rd
-
+import os
 from art import logo
-print(logo)
+from art import vs
 
 #function to generate a random choice from data list
 def selectItem():
@@ -13,19 +13,30 @@ def selectItem():
 def playGame():
     score = 0
     isGameOver = False
+    scoreMessage = ""
     A = selectItem()
-    print(f"Compare A: {A['name']}, a {A['description']}, from {A['country']}")
-    B = selectItem()
-    print(f"Against B: {B['name']}, a {B['description']}, from {B['country']}")
+    while not isGameOver:
+        os.system('cls')
+        print(logo)
+        if score != 0:
+            print(f"You're right! Current Score: {score}")
+        
+        print(f"Compare A: {A['name']}, a {A['description']}, from {A['country']}")
+        
+        print(vs)
+        B = selectItem()
+        print(f"Against B: {B['name']}, a {B['description']}, from {B['country']}")
     
-    choice = input("Who has more followers? Type 'A' or 'B'").lower()
-    if choice == 'a' and A['follower_count'] > B['follower_count']:
-        score += 1 
-    elif choice == 'b' and B['follower_count'] > A['follower_count']:
-        score += 1
-    else:
-        isGameOver = True
-        print("You lose")
+        choice = input("Who has more followers? Type 'A' or 'B': ").lower()
+        if choice == 'a' and A['follower_count'] > B['follower_count']:
+            score += 1 
+        elif choice == 'b' and B['follower_count'] > A['follower_count']:
+            score += 1
+            A = B
+            
+        else:
+            isGameOver = True
+            print(f"Sorry, that's wrong. Final score: {score}")
     
     
 playGame()
